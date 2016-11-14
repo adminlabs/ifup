@@ -1,0 +1,59 @@
+@import 'pure-css-loader/src/css-loader';
+
+body {
+  width: 100%;
+  position: relative;
+  margin: 0;
+  text-align: center;
+  padding: 20px;
+
+  @media(min-width: 768px) {
+    height: 100vh;
+    padding: 0;
+  }
+}
+
+.loader,
+.loader.is-active {
+  background: rgba(#fff, .5);
+  opacity: 0;
+  z-index: -1;
+  transition: all .2s;
+
+  &.show {
+    opacity: 1;
+    z-index: 100;
+  }
+
+  &:before,
+  &:after {
+    color: #222;
+    border-color: #222;
+    border-left-color: #fff;
+  }
+}
+
+.wrapper {
+  @media(min-width: 768px) {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  form {
+    input {
+      border: 1px solid #bbb;
+      padding: 20px 30px;
+      font-size: 20px;
+    }
+  }
+}
+
+.data {
+  height: 0;
+  transition: all 1s;
+
+  &.hasdata {
+    height: auto;
+  }
+}

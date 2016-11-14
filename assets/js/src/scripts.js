@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   $("form").submit(function( event ) {
-    $('.data').addClass('loading');
+    $('.loader').addClass('show');
     event.preventDefault();
 
     $.ajax({
@@ -11,7 +11,7 @@ $(document).ready(function() {
       success: function(response, textStatus, jqXHR) {
         $('.data').html(response);
         $('.data').addClass('hasdata');
-        $('.data').removeClass('loading');
+        $('.loader').removeClass('show');
       },
       error: function(jqXHR, textStatus, errorThrown){
         alert(textStatus, errorThrown);

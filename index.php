@@ -7,17 +7,18 @@
     <meta name="description" content="Check if the website is down or up to see if it's available for the world.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="shortcut icon" href="images/favicon.png">
 </head>
 <body>
 
   <div class="wrapper">
 
+    <div class="loader loader-default is-active"></div>
     <div class="data"></div>
 
     <form method="post" action="process.php">
-      <input class="url" type="text" name="url" placeholder="Enter domain name (without http) or IP address ..." />
+      <input class="url" type="url" name="url" pattern="https?://.+" title="Include http://" placeholder="http://" />
       <input class="submit" name="submit" type="submit" value="Search" />
     </form>
 

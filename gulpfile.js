@@ -15,7 +15,7 @@ var pixrem      = require('gulp-pixrem');
 var exec        = require('child_process').exec;
 
 // Files
-var sass = 'assets/css/src/styles.scss';
+var styles = 'assets/css/src/styles.scss';
 var js = 'assets/js/src/*.js';
 var php = '**/*.php';
 
@@ -50,7 +50,7 @@ gulp.task('browsersync', function() {
 // Styles
 gulp.task('styles', function() {
 
-  gulp.src(sassFile)
+  gulp.src(styles)
 
     .pipe(sass({
       compass: false,
@@ -104,7 +104,7 @@ gulp.task('js', function() {
 gulp.task('js-watch', ['js'], browserSync.reload);
 gulp.task('watch', ['browsersync'], function() {
 
-  gulp.watch(sass, ['styles']);
+  gulp.watch(styles, ['styles']);
   gulp.watch(js, ['js-watch']);
 
 });
