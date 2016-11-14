@@ -15,8 +15,8 @@ var pixrem      = require('gulp-pixrem');
 var exec        = require('child_process').exec;
 
 // Files
-var sass = 'src/styles.scss';
-var js = 'src/scripts.js';
+var sass = 'assets/css/src/styles.scss';
+var js = 'assets/js/src/*.js';
 var php = '**/*.php';
 
 // Errors
@@ -77,7 +77,7 @@ gulp.task('styles', function() {
       mediaMerging: true,
       sourceMap: true
     }))
-    .pipe(gulp.dest('./'))
+    .pipe(gulp.dest('./assets/css/'))
     .pipe(browserSync.stream());
 
 });
@@ -91,19 +91,20 @@ gulp.task('js', function() {
 
       gulp.src(
         [
-          'src/js/src/scripts.js'
+          'node_modules/jquery/dist/jquery.js',
+          'assets/js/src/scripts.js'
         ])
-        .pipe(concat('all.js'))
+        .pipe(concat('global.js'))
         .pipe(uglify({preserveComments: false, compress: true, mangle: true}).on('error',function(e){console.log('\x07',e.message);return this.end();}))
         .pipe(header(banner, {pkg: pkg, currentDate: currentDate}))
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('./assets/js/'));
 });
 
 // Watch
 gulp.task('js-watch', ['js'], browserSync.reload);
 gulp.task('watch', ['browsersync'], function() {
 
-  gulp.watch(sassSrc, ['styles']);
-  gulp.watch(jsSrc, ['js-watch']);
+  gulp.watch(sass, ['styles']);
+  gulp.watch(js, ['js-watch']);
 
 });
