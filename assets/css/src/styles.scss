@@ -15,7 +15,7 @@ body {
 
 .loader,
 .loader.is-active {
-  background: rgba(#fff, .5);
+  background: rgba(#fff, .8);
   opacity: 0;
   z-index: -1;
   transition: all .2s;
@@ -52,6 +52,11 @@ body {
 .data {
   height: 0;
   transition: all 1s;
+
+  &.error {
+    color: red;
+    height: 40px;
+  }
 
   &.hasdata {
     height: auto;
