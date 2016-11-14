@@ -140,10 +140,12 @@ $options = array(
     CURLOPT_USERAGENT      => $agent,
     CURLOPT_NOBODY         => true,
     CURLOPT_HEADER         => true,
-    CURLOPT_RETURNTRANSFER => 1,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_BINARYTRANSFER => true,
+    CURLOPT_POST           => false,
     CURLOPT_VERBOSE        => false,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_ENCODING       => "",
+    CURLOPT_FOLLOWLOCATION => 20,
+    CURLOPT_ENCODING       => '',
     CURLOPT_AUTOREFERER    => true,
     CURLOPT_CONNECTTIMEOUT => 120,
     CURLOPT_TIMEOUT        => 10,
@@ -153,15 +155,27 @@ $options = array(
 curl_setopt_array( $ch, $options );
 $response = curl_exec($ch);
 $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$bodyclosingcheck = '/<\/body>(?![\s\S]*<\/body>[\s\S]*$)/i';
+$htmlsource = file_get_contents($url);
+$checkbody = preg_match($bodyclosingcheck, $htmlsource, $matches);
 
 curl_close($ch);
 
+// Check if site is something else than 200 (OK) or 0 (non existing) or less than 300 (not multiple)
 if ( $httpcode != 200 && $httpcode != 0 && $httpcode > 300 ) {
-    echo '<b style="color: red;">Site is down!</b> Return code is ' . responsecode($httpcode) . '' . curl_error($ch);
+    echo '<b style="color: red;">Site is down!</b> &mdash; Return code is ' . responsecode($httpcode) . '' . curl_error($ch);
+// Check if url is not existing at all
 } elseif( $httpcode == 0 ) {
   echo '<b style="color: red;">Site does not exist.</b>';
+// Check if </body> is not found
+} elseif ( $checkbody == 0 ) {
+  echo '<b style="color: red;">Site is down &mdash; &lt;/body&gt; tag not found.</b>';
+// Other cases should indicate everything is up
 } else {
     echo '<b style="color: green;">Site is up!</b><br><pre>' . htmlspecialchars($response) .'</pre>';
 }
+
+// HTML source:
+// echo '<pre>' . htmlspecialchars($htmlsource) . '</pre>';
 
 curl_close($ch);
