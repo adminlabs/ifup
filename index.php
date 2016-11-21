@@ -18,7 +18,7 @@
     <div class="data"></div>
 
     <form method="post" action="process.php">
-      <input class="url" type="url" name="url" pattern="https?://.+" title="Include http://" placeholder="http://" />
+      <input class="url" type="text" name="url" id="url" pattern="^(https?://)?([a-zA-Z0-9]([a-zA-ZäöüÄÖÜ0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$" required name="url" placeholder="yoursite.com" />
       <input class="submit" name="submit" type="submit" value="Search" />
     </form>
 

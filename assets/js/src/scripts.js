@@ -1,5 +1,13 @@
 $(document).ready(function() {
 
+  // // Allow adding regular url without having to type http
+  $("#url").change(function() {
+        if (!/^http:\/\//.test(this.value)) {
+            this.value = "http://" + this.value;
+        }
+    });
+
+  // Form ajax
   $("form").submit(function( event ) {
     $('.loader').addClass('show');
     event.preventDefault();
@@ -9,7 +17,9 @@ $(document).ready(function() {
       type: 'POST',
       timeout: 10000,
       data: $('form').serialize(),
+
       success: function(response, textStatus, jqXHR) {
+
         $('.data').removeClass('error');
         $('.data').html(response);
         $('.data').addClass('hasdata');
