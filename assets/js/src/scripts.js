@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   // // Allow adding regular url without having to type http
-  $("#url").change(function() {
+  $("#url").keydown(function() {
         if (!/^http:\/\//.test(this.value)) {
             this.value = "http://" + this.value;
         }
