@@ -180,7 +180,7 @@ if ( $url != '' ) {
     echo '<b style="color: red;">Timed out.</b>';
   } elseif( $httpcode == 0 ) {
     // Check if url is not existing at all
-    echo '<b style="color: red;">Site does not exist.</b>';
+    echo '<b style="color: red;">Site does not exist.</b> ';
   // Check if </body> is not found
   } elseif ( $checkbody == 0 ) {
     echo '<b style="color: red;">Site is down &mdash; &lt;/body&gt; tag not found.</b>';

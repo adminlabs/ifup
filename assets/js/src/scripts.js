@@ -30,9 +30,9 @@ $(document).ready(function() {
         $('.loader').removeClass('show');
 
         if (textStatus == "timeout") {
-          $('.data').append('Time out or slow site');
+          $('.data').text('Site is probably up but really slow (timed out). Try with www.');
         } else {
-          $('.data').append('Time out or slow site. Error:' + errorThrown);
+          $('.data').text('Site is probably up but really slow (timed out). Error:' + errorThrown);
         }
      }
     });
