@@ -50,11 +50,11 @@ $(document).ready(function() {
 
         if (textStatus == "timeout") {
           $('.data .message').text('Site down or really slow (timed out).');
-          $('.data h1, .load-time').removeClass('nocontent');
+          $('.data h1, .load-time, .close, .powered-by').removeClass('nocontent');
           $('.data h1').text('Site is down');
         } else {
           $('.data .message').text('Site down or really slow (timed out). Error:' + errorThrown);
-          $('.data h1, .load-time').removeClass('nocontent');
+          $('.data h1, .load-time, .close, .powered-by').removeClass('nocontent');
           $('.data h1').text('Site is down');
         }
      }
