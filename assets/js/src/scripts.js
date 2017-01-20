@@ -1,11 +1,16 @@
 $(document).ready(function() {
 
-  // // Allow adding regular url without having to type http
+  // Close button for data
+  $('.close').click(function() {
+    $('.data').fadeOut();
+  });
+
+  // Allow adding regular url without having to type http
   $("#url").keydown(function() {
-        if (!/^http:\/\//.test(this.value)) {
-            this.value = "http://" + this.value;
-        }
-    });
+    if (!/^http:\/\//.test(this.value)) {
+      this.value = "http://" + this.value;
+    }
+  });
 
   // Form ajax
   $("form").submit(function( event ) {
@@ -20,6 +25,7 @@ $(document).ready(function() {
 
       success: function(response, textStatus, jqXHR) {
 
+        $('.data').css('display', 'block');
         $('.data').removeClass('error');
         $('.data').html(response);
         $('.data').addClass('hasdata');

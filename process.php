@@ -174,28 +174,72 @@ if ( $url != '' ) {
 
   // Check if site is something else than 200 (OK) or 0 (non existing) or less than 300 (not multiple)
   if ( $httpcode != 200 && $httpcode != 0 && $httpcode > 300 ) {
+
       echo '<h1 class="error">Site is down for everyone!</h1>
       <p>Return code is ' . responsecode($httpcode) . '. Give this to your website host administrator.</p>';
       curl_error($ch);
+
+  // Check if url is timing out
   } elseif( $httpcode == 28 ) {
-    // Check if url is timing out
+
     echo '<h1 class="error">Timed out.</h1>
     <p>That means site is most probably down for everyone.</p>';
+
+  // Check if url is not existing at all
   } elseif( $httpcode == 0 ) {
-    // Check if url is not existing at all
+
     echo '<h1 class="error">Site does not exist.</h1>
     <p>A typo, or tried with non-existent site, huh?</p>';
+
   // Check if </body> is not found
   } elseif ( $checkbody == 0 ) {
+
     echo '<h1 class="error">Site is down or broken.</h1>
     <p>&lt;/body&gt; tag not found.</p>';
+
   // Other cases should indicate everything is up
   } else {
-      echo '<h1 class="success">Site is up!</h1>
-      <p>Load time was exactly <b>' . $statusinfo['total_time'] . ' seconds.</p>
+      echo '<h1 class="success">Site is up!</h1>';
 
-      <p>Details about the website and server:</p>
-      <pre>' . htmlspecialchars($response) .'</pre>';
+      // Fancy load time indicator
+      $loadtime_seconds = $statusinfo['total_time'];
+      if ( $loadtime_seconds < 1) :
+
+        // If load time is under second, let's calculate milliseconds
+        $loadtime = $loadtime_seconds * 100 . 'ms';
+
+        // It's super good speed, so let's have some green
+        $speed = 'success';
+        $message = 'You have a really fast site! congrats!';
+
+      elseif ( $loadtime_seconds > 1 && $loadtime_seconds < 2) :
+
+        // Slower than one seconds, so let's show time in seconds
+        $loadtime = $loadtime_seconds . 's';
+
+        // It's slower than fast sites, so let's show orange
+        $speed = 'warning';
+        $message = 'Decent load time.';
+
+      else :
+
+        // Otherwise we'll show just seconds
+        $loadtime = $loadtime_seconds . 's';
+
+        // It's slooow, so red it is
+        $speed = 'error';
+        $message = 'A bit slow site... maybe you should optimize.';
+
+      endif;
+
+      echo '<div class="load-time '. $speed .'">
+        <h3 class="'. $speed .'">' . $loadtime . '</h3>
+        <p class="'. $speed .'">' . $message . '</p>
+      </div>
+
+      <p class="close" onclick="this.parentNode.style.display = \'none\';"><svg width="10" height="10" fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174L21.03-.046l-9.09 9.179L2.764.045l-2.81 2.81L9.14 11.96.045 21.144l2.81 2.81 9.112-9.192 9.18 9.1z"/></svg>Close</p>
+
+      <pre class="details">' . htmlspecialchars($response) .'</pre>';
   }
 
 }
