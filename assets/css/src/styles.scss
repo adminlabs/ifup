@@ -10,10 +10,18 @@ body {
   text-align: center;
   padding: 20px;
   font-family: $font-base;
+  padding: 0;
 
-  @media(min-width: 768px) {
-    height: 100vh;
-    padding: 0;
+  .error {
+    color: $color-error;
+  }
+
+  .success {
+    color: $color-success;
+  }
+
+  b {
+    font-weight: 500;
   }
 }
 
@@ -43,12 +51,18 @@ body {
 }
 
 .wrapper {
-  height: 100vh;
+  height: 90vh;
+  overflow: hidden;
 
   form {
     position: relative;
     top: 50%;
     transform: translateY(-45%);
+    transition: all 1s;
+
+    &.submitted {
+      top: 60px;
+    }
 
     input {
       border: 0;
@@ -117,5 +131,10 @@ body {
 
   &.hasdata {
     height: auto;
+    position: relative;
+    width: 100%;
+    top: 20px;
+    font-family: $font-base;
+    color: #fff;
   }
 }

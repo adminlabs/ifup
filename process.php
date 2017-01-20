@@ -174,19 +174,28 @@ if ( $url != '' ) {
 
   // Check if site is something else than 200 (OK) or 0 (non existing) or less than 300 (not multiple)
   if ( $httpcode != 200 && $httpcode != 0 && $httpcode > 300 ) {
-      echo '<b style="color: red;">Site is down!</b> &mdash; Return code is ' . responsecode($httpcode) . '' . curl_error($ch);
+      echo '<h1 class="error">Site is down for everyone!</h1>
+      <p>Return code is ' . responsecode($httpcode) . '. Give this to your website host administrator.</p>';
+      curl_error($ch);
   } elseif( $httpcode == 28 ) {
     // Check if url is timing out
-    echo '<b style="color: red;">Timed out.</b>';
+    echo '<h1 class="error">Timed out.</h1>
+    <p>That means site is most probably down for everyone.</p>';
   } elseif( $httpcode == 0 ) {
     // Check if url is not existing at all
-    echo '<b style="color: red;">Site does not exist.</b> ';
+    echo '<h1 class="error">Site does not exist.</h1>
+    <p>A typo, or tried with non-existent site, huh?</p>';
   // Check if </body> is not found
   } elseif ( $checkbody == 0 ) {
-    echo '<b style="color: red;">Site is down &mdash; &lt;/body&gt; tag not found.</b>';
+    echo '<h1 class="error">Site is down or broken.</h1>
+    <p>&lt;/body&gt; tag not found.</p>';
   // Other cases should indicate everything is up
   } else {
-      echo '<b style="color: green;">Site is up!</b> &mdash; It took ' . $statusinfo['total_time'] . 's <br><pre>' . htmlspecialchars($response) .'</pre>';
+      echo '<h1 class="success">Site is up!</h1>
+      <p>Load time was exactly <b>' . $statusinfo['total_time'] . ' seconds.</p>
+
+      <p>Details about the website and server:</p>
+      <pre>' . htmlspecialchars($response) .'</pre>';
   }
 
 }
