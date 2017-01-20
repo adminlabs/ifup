@@ -5,13 +5,6 @@ $(document).ready(function() {
     $('.data').fadeOut();
   });
 
-  // Allow adding regular url without having to type http
-  $("#url").keydown(function() {
-    if (!/^http:\/\//.test(this.value)) {
-      this.value = "http://" + this.value;
-    }
-  });
-
   // Form ajax
   $("form").submit(function( event ) {
     $('.loader').addClass('show');
@@ -39,9 +32,13 @@ $(document).ready(function() {
         $('.loader').removeClass('show');
 
         if (textStatus == "timeout") {
-          $('.data .message').text('Site is probably up but really slow (timed out). Try with www.');
+          $('.data .message').text('Site down or really slow (timed out).');
+          $('.data h1, .load-time').removeClass('nocontent');
+          $('.data h1').text('Site is down');
         } else {
-          $('.data .message').text('Site is probably up but really slow (timed out). Error:' + errorThrown);
+          $('.data .message').text('Site down or really slow (timed out). Error:' + errorThrown);
+          $('.data h1, .load-time').removeClass('nocontent');
+          $('.data h1').text('Site is down');
         }
      }
     });

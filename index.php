@@ -15,10 +15,16 @@
   <div class="wrapper">
 
     <div class="loader loader-default is-active"></div>
-    <div class="data"><span class="message"></span></div>
+    <div class="data"><h1 class="error nocontent"></h1>
+      <div class="load-time error nocontent">
+        <h3 class="error">error</h3>
+        <span class="message"></span>
+        <p class="close nocontent" onclick="this.parentNode.style.display = \'none\';"><svg width="10" height="10" fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174L21.03-.046l-9.09 9.179L2.764.045l-2.81 2.81L9.14 11.96.045 21.144l2.81 2.81 9.112-9.192 9.18 9.1z"/></svg>Close</p>
+          <p class="powered-by nocontent">ifup.io is powered by <a href="https://www.adminlabs.com">Admin Labs</a>.</p>
+      </div></div>
 
     <form method="post" action="process.php">
-      <input class="url" type="text" name="url" id="url" pattern="^(https?://)?([a-zA-Z0-9]([a-zA-ZäöüÄÖÜ0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$" required name="url" placeholder="yoursite.com" />
+      <input class="url" type="text" name="url" id="url" pattern="^(https?://)?([a-zA-Z0-9]([a-zA-ZäöüÄÖÜ0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$" required name="url" placeholder="http://yoursite.com" />
       <input class="submit" name="submit" type="submit" value="Search" />
     </form>
 
