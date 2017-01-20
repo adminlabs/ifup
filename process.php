@@ -176,26 +176,39 @@ if ( $url != '' ) {
   if ( $httpcode != 200 && $httpcode != 0 && $httpcode > 300 ) {
 
       echo '<h1 class="error">Site is down for everyone!</h1>
-      <p>Return code is ' . responsecode($httpcode) . '. Give this to your website host administrator.</p>';
+      <div class="load-time error">
+        <h3 class="error">error</h3>
+        <p class="message error">Return code is ' . responsecode($httpcode) . '. Give this to your website host administrator.</p>
+      </div>';
+
       curl_error($ch);
 
   // Check if url is timing out
   } elseif( $httpcode == 28 ) {
 
     echo '<h1 class="error">Timed out.</h1>
-    <p>That means site is most probably down for everyone.</p>';
+    <div class="load-time error">
+      <h3 class="error">error</h3>
+      <p class="message error">That means site is most probably down for everyone.</p>
+    </div>';
 
   // Check if url is not existing at all
   } elseif( $httpcode == 0 ) {
 
     echo '<h1 class="error">Site does not exist.</h1>
-    <p>A typo, or tried with non-existent site, huh?</p>';
+    <div class="load-time error">
+      <h3 class="error">error</h3>
+      <p class="message error">A typo, or tried with non-existent site, huh?</p>
+    </div>';
 
   // Check if </body> is not found
   } elseif ( $checkbody == 0 ) {
 
     echo '<h1 class="error">Site is down or broken.</h1>
-    <p>&lt;/body&gt; tag not found.</p>';
+    <div class="load-time error">
+      <h3 class="error">error</h3>
+      <p class="message error">&lt;/body&gt; tag not found.</p>
+    </div>';
 
   // Other cases should indicate everything is up
   } else {
@@ -234,13 +247,14 @@ if ( $url != '' ) {
 
       echo '<div class="load-time '. $speed .'">
         <h3 class="'. $speed .'">' . $loadtime . '</h3>
-        <p class="'. $speed .'">' . $message . '</p>
+        <p class="message '. $speed .'">' . $message . '</p>
       </div>
-
-      <p class="close" onclick="this.parentNode.style.display = \'none\';"><svg width="10" height="10" fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174L21.03-.046l-9.09 9.179L2.764.045l-2.81 2.81L9.14 11.96.045 21.144l2.81 2.81 9.112-9.192 9.18 9.1z"/></svg>Close</p>
 
       <pre class="details">' . htmlspecialchars($response) .'</pre>';
   }
+
+  echo '<p class="close" onclick="this.parentNode.style.display = \'none\';"><svg width="10" height="10" fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174L21.03-.046l-9.09 9.179L2.764.045l-2.81 2.81L9.14 11.96.045 21.144l2.81 2.81 9.112-9.192 9.18 9.1z"/></svg>Close</p>
+    <p class="powered-by">ifup.io is powered by <a href="https://www.adminlabs.com">Admin Labs</a>.</p>';
 
 }
 

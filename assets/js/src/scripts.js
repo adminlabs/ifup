@@ -32,14 +32,16 @@ $(document).ready(function() {
         $('form').addClass('submitted');
         $('.loader').removeClass('show');
       },
-      error: function(jqXHR, textStatus, errorThrown){
+      error: function(jqXHR, textStatus, errorThrown) {
+
+        $('.data').css('display', 'block');
         $('.data').addClass('error');
         $('.loader').removeClass('show');
 
         if (textStatus == "timeout") {
-          $('.data').text('Site is probably up but really slow (timed out). Try with www.');
+          $('.data .message').text('Site is probably up but really slow (timed out). Try with www.');
         } else {
-          $('.data').text('Site is probably up but really slow (timed out). Error:' + errorThrown);
+          $('.data .message').text('Site is probably up but really slow (timed out). Error:' + errorThrown);
         }
      }
     });
