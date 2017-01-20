@@ -23,6 +23,7 @@ $(document).ready(function() {
         $('.data').removeClass('error');
         $('.data').html(response);
         $('.data').addClass('hasdata');
+        $('form').addClass('submitted');
         $('.loader').removeClass('show');
       },
       error: function(jqXHR, textStatus, errorThrown){

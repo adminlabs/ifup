@@ -1,0 +1,21 @@
+// Source: https://github.com/magnetikonline/sassboilerplate/blob/master/fontface.scss
+
+@mixin fontFace($family,$src,$weight: normal,$style: normal) {
+  @font-face {
+    font-family: $family;
+    src: url('#{$src}.eot'); // IE9 compat
+    src: url('#{$src}.eot?#iefix') format('embedded-opentype'), // IE8 and below
+      url('#{$src}.woff') format('woff'), // standards
+      url('#{$src}.ttf') format('truetype'), // Safari, Android, iOS
+      url('#{$src}.svg##{$family}') format('svg'); // legacy iOS
+
+    font-style: $style;
+    font-weight: $weight;
+  }
+}
+
+@include fontFace('Proxima Nova', '../fonts/proximanova-light-webfont', 300);
+@include fontFace('Proxima Nova', '../fonts/proximanova-reg-webfont', 400);
+@include fontFace('Proxima Nova', '../fonts/proximanova-sbold-webfont', 500);
+@include fontFace('Proxima Nova', '../fonts/proxima_nova_extrabold-webfont', 700);
+@include fontFace('Proxima Nova', '../fonts/proxima_nova_black-webfont', 900);
