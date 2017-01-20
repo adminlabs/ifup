@@ -23,9 +23,11 @@
           <p class="powered-by nocontent">ifup.io is powered by <a href="https://www.adminlabs.com">Admin Labs</a>.</p>
       </div></div>
 
+      <?php $url = $_GET["url"]; ?>
+
     <form method="post" action="process.php">
-      <input class="url" type="url" name="url" id="url" pattern="^(https?://)?([a-zA-Z0-9]([a-zA-ZäöüÄÖÜ0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$" required name="url" placeholder="http://yoursite.com" />
-      <input class="submit" name="submit" type="submit" value="Search" />
+      <input class="url" type="url" name="url" id="url" pattern="^(https?://)?([a-zA-Z0-9]([a-zA-ZäöüÄÖÜ0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$" required name="url" placeholder="http://yoursite.com" <?php if( ! empty( $url ) ) : echo 'value="' . $url . '"'; endif; ?>/>
+      <input class="submit" name="submit" type="submit" value="Check if up" />
     </form>
 
   </div><!-- .wrapper -->
