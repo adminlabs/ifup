@@ -5,6 +5,23 @@ $(document).ready(function() {
     $('.data').fadeOut();
   });
 
+  $('input.url').blur(function() {
+    var input = $(this);
+    var val = input.val();
+    if (val && !val.match(/^http([s]?):\/\/.*/)) {
+      input.val('http://' + val);
+    }
+  });
+
+  $(document).keypress(function(e) {
+    if(e.which == 13) {
+      var val = $('input.url').val();
+      if (val && !val.match(/^http([s]?):\/\/.*/)) {
+        input.val('http://' + val);
+      }
+    }
+  });
+
   // Form ajax
   $("form").submit(function( event ) {
     $('.loader').addClass('show');
