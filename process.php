@@ -182,6 +182,7 @@ if ( $url != '' ) {
       </div>';
 
       curl_error($ch);
+      curl_close($ch);
 
   // Check if url is timing out
   } elseif( $httpcode == 28 ) {
@@ -260,5 +261,3 @@ if ( $url != '' ) {
 
 // HTML source:
 // echo '<pre>' . htmlspecialchars($htmlsource) . '</pre>';
-
-curl_close($ch);
